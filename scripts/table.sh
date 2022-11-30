@@ -22,7 +22,7 @@ while read line; do
         echo "<td>$item</td>"
 	done 
 	echo "</tr>"
-done < < (tail -n +2 $1 )
+done < $1
 echo "</table>"
 
 
