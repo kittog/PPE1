@@ -1,12 +1,8 @@
 #!/usr/bin/env bash
 
 #===============================================================================
-# VOUS DEVEZ MODIFIER CE BLOC DE COMMENTAIRES.
-# Ici, on décrit le comportement du programme.
-# Indiquez, entre autres, comment on lance le programme et quels sont
-# les paramètres.
-# La forme est indicative, sentez-vous libres d'en changer !
-# Notamment pour quelque chose de plus léger, il n'y a pas de norme en bash.
+# Programme pas finis. Difficile de trouver les bonnes commandes à utiliser.
+# Pas le réflexe d'utiliser les pipes.
 #===============================================================================
 
 fichier_urls=$1 # le fichier d'URL en entrée
@@ -26,3 +22,12 @@ do
 	echo "ligne $lineno: $line";
 	lineno=$((lineno+1));
 done < $fichier_urls
+
+while read -r URL; do
+	echo -e "\tURL : $URL";
+	curl -iLs $URL | egrep "^HTTP/" | grep -Eo "[0-9]{3}"
+	# curl -i $URL | grep "^HTTP/" | cut -d" " -f2
+	# CHARSET : curl -iL $URL | egrep -o "charset(\w|-)+ | cut -d= -f2 | tail -n 1"
+curl -i $URL > file.txt # get header info
+grep -n "HTTP" file.txt # find HTTP
+# use cut to 
